@@ -11,11 +11,11 @@ import {
   TableRow
 } from "@mui/material"
 
-const StaffDetailsModal = ({ staff, open, onClose }) => {
+const StaffDetailsModal = ({ staff, onOpen, onClose }) => {
   if (!staff) return null
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+    <Dialog open={onOpen} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>Staff Details</DialogTitle>
       <DialogContent>
         <Table>

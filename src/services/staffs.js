@@ -12,4 +12,19 @@ export const getById = async (id) => {
   return response.data;
 };
 
-export default { getAll, getById };
+const createStaff = async (staffData) => {
+  const response = await axios.post(baseUrl, staffData);
+  return response.data;
+};
+
+const deleteStaff = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+  return response.data;
+};
+
+const updateStaff = async (id, updatedData) => {
+  const response = await axios.put(`${baseUrl}/${id}`, updatedData);
+  return response.data;
+};
+
+export default { getAll, getById, createStaff, deleteStaff, updateStaff };
