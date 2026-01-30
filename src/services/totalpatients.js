@@ -1,6 +1,6 @@
 import api from "./api"
 
-const baseUrl = "http://localhost:3001/api/totalpatients"
+const baseUrl = `${import.meta.env.VITE_API_URL}/api/totalpatients`
 
 export const getAll = async () => {
   const response = await api.get(baseUrl)
