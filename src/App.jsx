@@ -28,12 +28,11 @@ const App = () => {
         await dispatch(initializeStaffs())
       } else {
         setIsAuthenticated(false)
-        navigate('/login')
       }
       setLoading(false)
     }
     fetchData()
-  }, [dispatch, navigate])
+  }, [dispatch])
 
   const handleLogout = () => {
     localStorage.removeItem('token')
