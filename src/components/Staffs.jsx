@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import StaffDetailsModal from "./StaffDetailsModal"
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Stack, TablePagination, TextField, Box } from "@mui/material"
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Stack, TablePagination, TextField, Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material"
 import { createStaff, updateStaff, deleteStaff } from "../reducers/staffReducer"
 import { useDispatch } from "react-redux"
 import staffService from "../services/staffs"
@@ -12,29 +12,35 @@ const Staffs = () => {
   const dispatch = useDispatch()
   const staffs = useSelector((state) => state.staffs)
   const [searchQuery, setSearchQuery] = useState("")
-
-  const latestStaffs = useMemo(() => {
-    const list = staffs || []
-
-    const sortedByYear = [...list].sort((a, b) => b.year - a.year)
-
-    const byEmployee = new Map()
-    sortedByYear.forEach((record) => {
-      if (!byEmployee.has(record.employeeCode)) {
-        byEmployee.set(record.employeeCode, record)
-      }
-    })
-    return Array.from(byEmployee.values())
-  }, [staffs])
+  const [searchName, setSearchName] = useState("")
+  const [filterYear, setFilterYear] = useState("")
 
   const filteredStaffs = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return latestStaffs
+    const list = staffs || []
+    
+    let filtered = [...list].sort((a, b) => b.year - a.year)
+    
+    // Filter by employee code
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((staff) =>
+        staff.employeeCode?.toString().includes(searchQuery)
+      )
     }
-    return latestStaffs.filter((staff) =>
-      staff.employeeCode?.toString().includes(searchQuery)
-    )
-  }, [latestStaffs, searchQuery])
+    
+    // Filter by name
+    if (searchName.trim()) {
+      filtered = filtered.filter((staff) =>
+        staff.fullName?.toLowerCase().includes(searchName.toLowerCase())
+      )
+    }
+    
+    // Filter by year
+    if (filterYear) {
+      filtered = filtered.filter((staff) => staff.year?.toString() === filterYear)
+    }
+    
+    return filtered
+  }, [staffs, searchQuery, searchName, filterYear])
   
   const [open, setOpen] = useState(false)
   const [selectedStaff, setSelectedStaff] = useState(null)
@@ -59,7 +65,7 @@ const Staffs = () => {
   }
 
   const handleGraphOpen = (staff) => {
-    const list = (staffs || []).filter((item) => item.employeeCode === staff.employeeCode)
+    const list = (staffs || []).filter((item) => item.fullName === staff.fullName)
     setGraphSubject(staff)
     setGraphData(list)
     setGraphOpen(true)
@@ -108,7 +114,7 @@ const Staffs = () => {
     <>
       <TableContainer component={Paper} sx={{ margin: 3 }}>
         <h2 style={{ padding: "16px" }}>Hồ sơ nhân viên</h2>
-        <Box sx={{ padding: 2, display: "flex", gap: 2, alignItems: "center" }}>
+        <Box sx={{ padding: 2, display: "flex", gap: 2, alignItems: "center", flexWrap: "wrap" }}>
           <TextField
             label="Tìm kiếm theo mã nhân viên"
             variant="outlined"
@@ -118,8 +124,41 @@ const Staffs = () => {
               setSearchQuery(e.target.value)
               setPage(0)
             }}
-            sx={{ minWidth: 300 }}
+            sx={{ minWidth: 250 }}
           />
+          <TextField
+            label="Tìm kiếm theo tên"
+            variant="outlined"
+            size="small"
+            value={searchName}
+            onChange={(e) => {
+              setSearchName(e.target.value)
+              setPage(0)
+            }}
+            sx={{ minWidth: 250 }}
+          />
+          <FormControl size="small" sx={{ minWidth: 180 }}>
+            <InputLabel>Lọc theo năm</InputLabel>
+            <Select
+              value={filterYear}
+              label="Lọc theo năm"
+              onChange={(e) => {
+                setFilterYear(e.target.value)
+                setPage(0)
+              }}
+            >
+              <MenuItem value="">Tất cả</MenuItem>
+              {Array.from(
+                new Set((staffs || []).map((staff) => staff.year).filter(Boolean))
+              )
+                .sort((a, b) => b - a)
+                .map((year) => (
+                  <MenuItem key={year} value={year.toString()}>
+                    {year}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
           <Button variant="contained" color="primary" onClick={() => handleFormOpen(null)}>
             Thêm mới
           </Button>

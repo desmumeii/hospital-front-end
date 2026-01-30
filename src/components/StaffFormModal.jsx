@@ -86,22 +86,22 @@ const StaffFormModal = ({ open, onClose, initialData = {}, onSubmit }) => {
         </Typography>
         <Stack spacing={2}>
           <TextField
-            label="Employee Code"
-            name="employeeCode"
+            label="Mã nhân viên"
+            name="Mã nhân viên"
             value={formData.employeeCode}
             onChange={handleChange}
             required
           />
           <TextField
-            label="Full Name"
-            name="fullName"
+            label="Họ và tên"
+            name="Họ và tên"
             value={formData.fullName}
             onChange={handleChange}
             required
           />
           <TextField
-            label="DOB"
-            name="dob"
+            label="Ngày sinh"
+            name="Ngày sinh"
             type="date"
             value={formData.dob}
             onChange={handleChange}
@@ -109,21 +109,21 @@ const StaffFormModal = ({ open, onClose, initialData = {}, onSubmit }) => {
             required
           />
           <TextField
-            label="Department"
-            name="department"
+            label="Đơn vị"
+            name="Đơn vị"
             value={formData.department}
             onChange={handleChange}
             required
           />
           <TextField
-            label="Classification"
-            name="classification"
+            label="Phân loại"
+            name="Phân loại"
             value={formData.classification}
             onChange={handleChange}
           />
           <TextField
-            label="Year"
-            name="year"
+            label="Năm"
+            name="Năm"
             type="number"
             value={formData.year}
             onChange={handleChange}
@@ -131,92 +131,92 @@ const StaffFormModal = ({ open, onClose, initialData = {}, onSubmit }) => {
           />
 
           <TextField
-            label="Medical History"
-            name="medicalHistory"
+            label="Tiền sử bệnh"
+            name="Tiền sử bệnh"
             value={formData.medicalHistory}
             onChange={handleChange}
           />
           <TextField
-            label="Clinical Exam"
-            name="clinicalExam"
+            label="Khám lâm sàng"
+            name="Khám lâm sàng"
             value={formData.clinicalExam}
             onChange={handleChange}
           />
           <TextField
-            label="Gynecology Exam"
-            name="gynecologyExam"
+            label="Khám phụ khoa"
+            name="Khám phụ khoa"
             value={formData.gynecologyExam}
             onChange={handleChange}
           />
           <TextField
-            label="Cytology Exam"
-            name="cytologyExam"
+            label="Khám tế bào học"
+            name="Khám tế bào học"
             value={formData.cytologyExam}
             onChange={handleChange}
           />
           <TextField
-            label="Blood Test"
-            name="bloodTest"
+            label="Xét nghiệm máu"
+            name="Xét nghiệm máu"
             value={formData.bloodTest}
             onChange={handleChange}
           />
           <TextField
-            label="Urine Test"
-            name="urineTest"
+            label="Xét nghiệm nước tiểu"
+            name="Xét nghiệm nước tiểu"
             value={formData.urineTest}
             onChange={handleChange}
           />
           <TextField
-            label="ECG"
-            name="ecg"
+            label="Điện tâm đồ (ECG)"
+            name="Điện tâm đồ (ECG)"
             value={formData.ecg}
             onChange={handleChange}
           />
           <TextField
-            label="X-Ray"
-            name="xray"
+            label="X-Quang"
+            name="X-Quang"
             value={formData.xray}
             onChange={handleChange}
           />
           <TextField
-            label="Pelvic Ultrasound 2D"
-            name="pelvicUltrasound2D"
+            label="Siêu âm vùng chậu 2D"
+            name="Siêu âm vùng chậu 2D"
             value={formData.pelvicUltrasound2D}
             onChange={handleChange}
           />
           <TextField
-            label="Thyroid Ultrasound 2D"
-            name="thyroidUltrasound2D"
+            label="Siêu âm tuyến giáp 2D"
+            name="Siêu âm tuyến giáp 2D"
             value={formData.thyroidUltrasound2D}
             onChange={handleChange}
           />
           <TextField
-            label="Breast Ultrasound 2D"
-            name="breastUltrasound2D"
+            label="Siêu âm tuyến vú 2D"
+            name="Siêu âm tuyến vú 2D"
             value={formData.breastUltrasound2D}
             onChange={handleChange}
           />
           <TextField
-            label="Bone Density"
-            name="boneDensity"
+            label="Mật độ xương"
+            name="Mật độ xương"
             value={formData.boneDensity}
             onChange={handleChange}
           />
           <TextField
-            label="Fine Needle Aspiration"
-            name="fineNeedleAspiration"
+            label="Chọc hút kim nhỏ"
+            name="Chọc hút kim nhỏ"
             value={formData.fineNeedleAspiration}
             onChange={handleChange}
           />
           <TextField
-            label="Conclusion"
-            name="conclusion"
+            label="Kết luận"
+            name="Kết luận"
             value={formData.conclusion}
             onChange={handleChange}
           />
 
           <Button type="submit" variant="contained">
-            {initialData && initialData.id ? "Update" : "Add"}
+            {initialData && initialData.id ? "Cập nhật" : "Thêm mới"}
           </Button>
         </Stack>
       </Box>

@@ -78,10 +78,17 @@ const HomePage = () => {
             }))
           },
           {
-            name: 'K tuyến giáp',
+            name: 'Ung thư tuyến giáp',
             ...Object.fromEntries(diseaseYearsUnique.map(year => {
               const record = diseaseDataRaw.find(r => r.year === year)
               return [year.toString(), record ? record.thyroidcancer : 0]
+            }))
+          },
+          {
+            name: 'Ung thư tuyến giáp sau PT',
+            ...Object.fromEntries(diseaseYearsUnique.map(year => {
+              const record = diseaseDataRaw.find(r => r.year === year)
+              return [year.toString(), record ? record.thyroidcanceraftersurgery : 0]
             }))
           },
           {
@@ -130,6 +137,7 @@ const HomePage = () => {
             { name: 'ĐTĐ/Tiền ĐTĐ', value: diseaseRecord.diabetes },
             { name: 'Tăng huyết áp', value: diseaseRecord.hypertension },
             { name: 'K tuyến giáp', value: diseaseRecord.thyroidcancer },
+            { name: 'K tuyến giáp sau PT', value: diseaseRecord.thyroidcanceraftersurgery },
             { name: 'Rối loạn lipid máu', value: diseaseRecord.dyslipidemia },
             { name: 'Tăng acid uric', value: diseaseRecord.hyperuricemia },
             { name: 'Polyp túi mật', value: diseaseRecord.galibladderpolyps }

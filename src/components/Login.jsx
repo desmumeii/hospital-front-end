@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
 import axios from 'axios'
 
 const Login = () => {
@@ -7,7 +7,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -49,6 +48,13 @@ const Login = () => {
         width: '100%',
         maxWidth: '400px'
       }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2_Y2dh831BjXg97i8jXC_hvJugLBYtXRuQ&s"
+            alt="Health Logo"
+            style={{ height: '60px', width: 'auto' }}
+          />
+        </div>
         <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>PHẦN MỀM QUẢN LÝ HỒ SƠ SỨC KHỎE CÁN BỘ</h1>
 
         {error && (
