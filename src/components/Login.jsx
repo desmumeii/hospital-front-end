@@ -24,8 +24,8 @@ const Login = () => {
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('username', response.data.username)
 
-      // Redirect to home
-      navigate('/')
+      // Redirect to home with full page reload to trigger auth check
+      window.location.href = '/'
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed')
     } finally {
