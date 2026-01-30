@@ -23,9 +23,16 @@ const App = () => {
       const user = localStorage.getItem('username')
       
       if (token && user) {
-        setIsAuthenticated(true)
-        setUsername(user)
-        await dispatch(initializeStaffs())
+        try {
+          await dispatch(initializeStaffs())
+          setIsAuthenticated(true)
+          setUsername(user)
+        } catch {
+          // Token is invalid or expired, clear it
+          localStorage.removeItem('token')
+          localStorage.removeItem('username')
+          setIsAuthenticated(false)
+        }
       } else {
         setIsAuthenticated(false)
       }
