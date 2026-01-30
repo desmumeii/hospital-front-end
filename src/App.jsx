@@ -76,15 +76,12 @@ const App = () => {
           />
           <div style={{ color: "#fff" }}>
             <h1 style={{ color: "#fff", margin: 0, fontSize: "18px", fontWeight: 700 }}>
-              Health Management System
+              HỒ SƠ SỨC KHỎE CÁN BỘ VIÊN CHỨC VÀ NGƯỜI LAO ĐỘNG BỆNH VIỆN NHI TRUNG ƯƠNG
             </h1>
-            <p style={{ color: "#dbeafe", margin: "2px 0 0 0", fontSize: "12px" }}>
-              Hospital Healthcare Analytics
-            </p>
           </div>
         </div>
         <div style={{ color: "#fff", display: "flex", alignItems: "center", gap: "20px" }}>
-          <span style={{ fontSize: "14px" }}>User: <strong>{username}</strong></span>
+          <span style={{ fontSize: "14px" }}>Người dùng: <strong>{username}</strong></span>
           <button
             onClick={handleLogout}
             style={{
@@ -101,7 +98,7 @@ const App = () => {
             onMouseOver={(e) => e.target.style.backgroundColor = "#b91c1c"}
             onMouseOut={(e) => e.target.style.backgroundColor = "#dc2626"}
           >
-            Logout
+            Đăng xuất
           </button>
         </div>
       </header>
@@ -148,7 +145,7 @@ const App = () => {
               paddingLeft: "8px"
             })}
           >
-            📊 Main Page
+            📊 Trang chính
           </NavLink>
           <NavLink
             to="/staffs"
@@ -165,7 +162,7 @@ const App = () => {
               paddingLeft: "8px"
             })}
           >
-            👥 Staff
+            👥 Hồ sơ sức khỏe
           </NavLink>
           <NavLink
             to="/classify-patients"
@@ -182,7 +179,7 @@ const App = () => {
               paddingLeft: "8px"
             })}
           >
-            🏥 Classification
+            🏥 Phân loại sức khỏe
           </NavLink>
           <NavLink
             to="/disease-records"
@@ -199,7 +196,7 @@ const App = () => {
               paddingLeft: "8px"
             })}
           >
-            📋 Disease Records
+            📋 Phân loại bệnh tật
           </NavLink>
           <NavLink
             to="/total-patients"
@@ -216,7 +213,7 @@ const App = () => {
               paddingLeft: "8px"
             })}
           >
-            👤 Total Patients
+            👤 Tổng người khám
           </NavLink>
         </nav>
         <main style={{

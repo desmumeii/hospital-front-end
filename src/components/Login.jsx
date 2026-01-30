@@ -49,7 +49,7 @@ const Login = () => {
         width: '100%',
         maxWidth: '400px'
       }}>
-        <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>Health Management System</h1>
+        <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>PHẦN MỀM QUẢN LÝ HỒ SƠ SỨC KHỎE CÁN BỘ</h1>
 
         {error && (
           <div style={{
@@ -66,13 +66,13 @@ const Login = () => {
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
-              Username
+              Tên đăng nhập
             </label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="admin"
+              placeholder=""
               style={{
                 width: '100%',
                 padding: '10px',
@@ -87,13 +87,13 @@ const Login = () => {
 
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold' }}>
-              Password
+              Mật khẩu
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="password"
+              placeholder=""
               style={{
                 width: '100%',
                 padding: '10px',
@@ -121,15 +121,9 @@ const Login = () => {
               cursor: loading ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </button>
         </form>
-
-        <p style={{ textAlign: 'center', marginTop: '20px', color: '#666', fontSize: '14px' }}>
-          Demo Credentials:<br />
-          Username: <strong>admin</strong><br />
-          Password: <strong>password</strong>
-        </p>
       </div>
     </div>
   )

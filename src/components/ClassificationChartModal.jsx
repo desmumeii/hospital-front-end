@@ -27,30 +27,30 @@ const ClassificationChartModal = ({ open, onClose, data, subject }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>
-        Classification Over Time{subject ? ` – ${subject.fullName || "Staff"}` : ""}
+        Phân loại hàng năm{subject ? ` – ${subject.fullName || "Nhân viên"}` : ""}
       </DialogTitle>
       <DialogContent dividers>
         {chartData.length === 0 ? (
-          <Typography>No data available for charting.</Typography>
+          <Typography>Không có dữ liệu để hiển thị biểu đồ.</Typography>
         ) : (
           <>
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="year" />
-                <YAxis domain={[0, 5]} ticks={[0, 1, 2, 3, 4, 5]} label={{ value: "Classification Level", angle: -90, position: "insideLeft" }} />
+                <YAxis domain={[0, 5]} ticks={[0, 1, 2, 3, 4, 5]} label={{ value: "Phân loại", angle: -90, position: "insideLeft" }} />
                 <Tooltip 
                   contentStyle={{ backgroundColor: "#fff", border: "1px solid #ccc" }}
-                  formatter={(value) => [`Level ${valueToLevel[value] || value}`, "Classification"]}
+                  formatter={(value) => [`Loại ${valueToLevel[value] || value}`, "Phân loại"]}
                 />
-                <Bar dataKey="value" fill={levelColor} name="Classification" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="value" fill={levelColor} name="Phân loại" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </>
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Close</Button>
+        <Button onClick={onClose}>Đóng</Button>
       </DialogActions>
     </Dialog>
   )

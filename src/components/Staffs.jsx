@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import StaffDetailsModal from "./StaffDetailsModal"
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Stack, TablePagination } from "@mui/material"
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Stack, TablePagination, TextField, Box } from "@mui/material"
 import { createStaff, updateStaff, deleteStaff } from "../reducers/staffReducer"
 import { useDispatch } from "react-redux"
 import staffService from "../services/staffs"
@@ -11,14 +11,13 @@ import ClassificationChartModal from "./ClassificationChartModal"
 const Staffs = () => {
   const dispatch = useDispatch()
   const staffs = useSelector((state) => state.staffs)
+  const [searchQuery, setSearchQuery] = useState("")
 
-  // Derive a list sorted by year (latest first), keeping only the most recent record per employee
   const latestStaffs = useMemo(() => {
     const list = staffs || []
-    // First, sort by year in descending order (latest years first)
+
     const sortedByYear = [...list].sort((a, b) => b.year - a.year)
-    
-    // Then keep only the latest year per employee
+
     const byEmployee = new Map()
     sortedByYear.forEach((record) => {
       if (!byEmployee.has(record.employeeCode)) {
@@ -27,6 +26,15 @@ const Staffs = () => {
     })
     return Array.from(byEmployee.values())
   }, [staffs])
+
+  const filteredStaffs = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return latestStaffs
+    }
+    return latestStaffs.filter((staff) =>
+      staff.employeeCode?.toString().includes(searchQuery)
+    )
+  }, [latestStaffs, searchQuery])
   
   const [open, setOpen] = useState(false)
   const [selectedStaff, setSelectedStaff] = useState(null)
@@ -38,8 +46,8 @@ const Staffs = () => {
   const [formInitialData, setFormInitialData] = useState(null)
 
 
-  const [page, setPage] = useState(0) // current page index
-  const [rowsPerPage, setRowsPerPage] = useState(10) // number of rows per page
+  const [page, setPage] = useState(0) 
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   
   const handleOpen = (staff) => {
     setSelectedStaff(staff)
@@ -69,7 +77,7 @@ const Staffs = () => {
     setPage(0)
   }
 
-  const paginatedStaffs = latestStaffs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+  const paginatedStaffs = filteredStaffs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
   
   const handleDelete = async (id) => {
     await staffService.deleteStaff(id);
@@ -99,21 +107,34 @@ const Staffs = () => {
   return (
     <>
       <TableContainer component={Paper} sx={{ margin: 3 }}>
-        <h2 style={{ padding: "16px" }}>Staff Records</h2>
-        <Button variant="contained" color="primary" sx={{ margin: 2 }} onClick={() => handleFormOpen(null)}>
-          Add New Staff
-        </Button>
+        <h2 style={{ padding: "16px" }}>Hồ sơ nhân viên</h2>
+        <Box sx={{ padding: 2, display: "flex", gap: 2, alignItems: "center" }}>
+          <TextField
+            label="Tìm kiếm theo mã nhân viên"
+            variant="outlined"
+            size="small"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value)
+              setPage(0)
+            }}
+            sx={{ minWidth: 300 }}
+          />
+          <Button variant="contained" color="primary" onClick={() => handleFormOpen(null)}>
+            Thêm mới
+          </Button>
+        </Box>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>#</TableCell>
-              <TableCell>Actions</TableCell>
-              <TableCell>Year</TableCell>
-              <TableCell>Employee Code</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Department</TableCell>
-              <TableCell>DOB</TableCell>
-              <TableCell>Classification</TableCell>
+              <TableCell>Hành động</TableCell>
+              <TableCell>Năm</TableCell>
+              <TableCell>Mã nhân viên</TableCell>
+              <TableCell>Tên</TableCell>
+              <TableCell>Đơn vị</TableCell>
+              <TableCell>Ngày sinh</TableCell>
+              <TableCell>Phân loại</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -122,10 +143,10 @@ const Staffs = () => {
                 <TableCell>{page * rowsPerPage + index + 1}</TableCell>
                 <TableCell>
                   <Stack direction="column" spacing={1}>
-                    <Button variant="contained" size="small" onClick={() => handleOpen(staff)}>Details</Button>
-                    <Button variant="outlined" size="small" onClick={() => handleGraphOpen(staff)}>Graphs</Button>
-                    <Button variant="contained" color="success" size="small" onClick={() => handleFormOpen(staff)}>Update</Button>
-                    <Button variant="contained" color="error" size="small" onClick={() => handleDelete(staff.id)}>Delete</Button>
+                    <Button variant="contained" size="small" onClick={() => handleOpen(staff)}>Chi tiết</Button>
+                    <Button variant="outlined" size="small" onClick={() => handleGraphOpen(staff)}>Biểu đồ</Button>
+                    <Button variant="contained" color="success" size="small" onClick={() => handleFormOpen(staff)}>Cập nhật</Button>
+                    <Button variant="contained" color="error" size="small" onClick={() => handleDelete(staff.id)}>Xóa</Button>
                   </Stack>
                 </TableCell>
                 <TableCell>{staff.year}</TableCell>
@@ -141,7 +162,7 @@ const Staffs = () => {
       </TableContainer>
       <TablePagination
         component="div"
-        count={latestStaffs.length}
+        count={filteredStaffs.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

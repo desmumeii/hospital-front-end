@@ -16,68 +16,68 @@ const StaffDetailsModal = ({ staff, onOpen, onClose }) => {
 
   return (
     <Dialog open={onOpen} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Staff Details</DialogTitle>
+      <DialogTitle>Hồ sơ sức khỏe</DialogTitle>
       <DialogContent>
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell><strong>Name</strong></TableCell>
+              <TableCell><strong>Tên</strong></TableCell>
               <TableCell>{staff.fullName}</TableCell>
-              <TableCell><strong>DOB</strong></TableCell>
+              <TableCell><strong>Ngày sinh</strong></TableCell>
               <TableCell>{staff.dob}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Employee Code</strong></TableCell>
+              <TableCell><strong>Mã nhân viên</strong></TableCell>
               <TableCell>{staff.employeeCode}</TableCell>
-              <TableCell><strong>Department</strong></TableCell>
+              <TableCell><strong>Đơn vị</strong></TableCell>
               <TableCell>{staff.department}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Medical History</strong></TableCell>
+              <TableCell><strong>Tiền sử bệnh</strong></TableCell>
               <TableCell>{staff.medicalHistory || 'N/A'}</TableCell>
-              <TableCell><strong>Clinical Exam</strong></TableCell>
+              <TableCell><strong>Khám lâm sàng</strong></TableCell>
               <TableCell>{staff.clinicalExam || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Gynecology Exam</strong></TableCell>
+              <TableCell><strong>Khám phụ khoa</strong></TableCell>
               <TableCell>{staff.gynecologyExam || 'N/A'}</TableCell>
-              <TableCell><strong>Cytology Exam</strong></TableCell>
+              <TableCell><strong>Khám tế bào học</strong></TableCell>
               <TableCell>{staff.cytologyExam || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Blood Test</strong></TableCell>
+              <TableCell><strong>Xét nghiệm máu</strong></TableCell>
               <TableCell>{staff.bloodTest || 'N/A'}</TableCell>
-              <TableCell><strong>Urine Test</strong></TableCell>
+              <TableCell><strong>Xét nghiệm nước tiểu</strong></TableCell>
               <TableCell>{staff.urineTest || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>ECG</strong></TableCell>
+              <TableCell><strong>Điện tâm đồ (ECG)</strong></TableCell>
               <TableCell>{staff.ecg || 'N/A'}</TableCell>
-              <TableCell><strong>X-Ray</strong></TableCell>
+              <TableCell><strong>X-Quang</strong></TableCell>
               <TableCell>{staff.xray || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Pelvic Ultrasound 2D</strong></TableCell>
+              <TableCell><strong>Siêu âm vùng chậu 2D</strong></TableCell>
               <TableCell>{staff.pelvicUltrasound2D || 'N/A'}</TableCell>
-              <TableCell><strong>Thyroid Ultrasound 2D</strong></TableCell>
+              <TableCell><strong>Siêu âm tuyến giáp 2D</strong></TableCell>
               <TableCell>{staff.thyroidUltrasound2D || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Breast Ultrasound 2D</strong></TableCell>
+              <TableCell><strong>Siêu âm vú 2D</strong></TableCell>
               <TableCell>{staff.breastUltrasound2D || 'N/A'}</TableCell>
-              <TableCell><strong>Bone Density</strong></TableCell>
+              <TableCell><strong>Độ loãng xương</strong></TableCell>
               <TableCell>{staff.boneDensity || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Fine Needle Aspiration</strong></TableCell>
+              <TableCell><strong>Chọc hút kim nhỏ</strong></TableCell>
               <TableCell>{staff.fineNeedleAspiration || 'N/A'}</TableCell>
-              <TableCell><strong>Classification</strong></TableCell>
+              <TableCell><strong>Phân loại</strong></TableCell>
               <TableCell>{staff.classification || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Conclusion</strong></TableCell>
+              <TableCell><strong>Kết luận</strong></TableCell>
               <TableCell>{staff.conclusion || 'N/A'}</TableCell>
-              <TableCell><strong>Year</strong></TableCell>
+              <TableCell><strong>Năm</strong></TableCell>
               <TableCell>{staff.year}</TableCell>
             </TableRow>
           </TableBody>
