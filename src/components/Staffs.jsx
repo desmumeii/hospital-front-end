@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import StaffDetailsModal from "./StaffDetailsModal"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Stack, TablePagination } from "@mui/material"
@@ -6,13 +6,33 @@ import { createStaff, updateStaff, deleteStaff } from "../reducers/staffReducer"
 import { useDispatch } from "react-redux"
 import staffService from "../services/staffs"
 import StaffFormModal from "./StaffFormModal"
+import ClassificationChartModal from "./ClassificationChartModal"
 
 const Staffs = () => {
   const dispatch = useDispatch()
-  const staffs = useSelector((state) => state.staffs) || []
+  const staffs = useSelector((state) => state.staffs)
+
+  // Derive a list sorted by year (latest first), keeping only the most recent record per employee
+  const latestStaffs = useMemo(() => {
+    const list = staffs || []
+    // First, sort by year in descending order (latest years first)
+    const sortedByYear = [...list].sort((a, b) => b.year - a.year)
+    
+    // Then keep only the latest year per employee
+    const byEmployee = new Map()
+    sortedByYear.forEach((record) => {
+      if (!byEmployee.has(record.employeeCode)) {
+        byEmployee.set(record.employeeCode, record)
+      }
+    })
+    return Array.from(byEmployee.values())
+  }, [staffs])
   
   const [open, setOpen] = useState(false)
   const [selectedStaff, setSelectedStaff] = useState(null)
+  const [graphOpen, setGraphOpen] = useState(false)
+  const [graphData, setGraphData] = useState([])
+  const [graphSubject, setGraphSubject] = useState(null)
   
   const [formOpen, setFormOpen] = useState(false)
   const [formInitialData, setFormInitialData] = useState(null)
@@ -30,6 +50,17 @@ const Staffs = () => {
     setSelectedStaff(null)
   }
 
+  const handleGraphOpen = (staff) => {
+    const list = (staffs || []).filter((item) => item.employeeCode === staff.employeeCode)
+    setGraphSubject(staff)
+    setGraphData(list)
+    setGraphOpen(true)
+  }
+
+  const handleGraphClose = () => {
+    setGraphOpen(false)
+  }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -38,7 +69,7 @@ const Staffs = () => {
     setPage(0)
   }
 
-  const paginatedStaffs = staffs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+  const paginatedStaffs = latestStaffs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
   
   const handleDelete = async (id) => {
     await staffService.deleteStaff(id);
@@ -92,7 +123,7 @@ const Staffs = () => {
                 <TableCell>
                   <Stack direction="column" spacing={1}>
                     <Button variant="contained" size="small" onClick={() => handleOpen(staff)}>Details</Button>
-                    <Button variant="outlined" size="small">Graphs</Button>
+                    <Button variant="outlined" size="small" onClick={() => handleGraphOpen(staff)}>Graphs</Button>
                     <Button variant="contained" color="success" size="small" onClick={() => handleFormOpen(staff)}>Update</Button>
                     <Button variant="contained" color="error" size="small" onClick={() => handleDelete(staff.id)}>Delete</Button>
                   </Stack>
@@ -110,7 +141,7 @@ const Staffs = () => {
       </TableContainer>
       <TablePagination
         component="div"
-        count={staffs.length}
+        count={latestStaffs.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
@@ -120,6 +151,7 @@ const Staffs = () => {
 
       {/* Modal */}
       <StaffDetailsModal staff={selectedStaff} onOpen={open} onClose={handleClose} />
+      <ClassificationChartModal open={graphOpen} onClose={handleGraphClose} data={graphData} subject={graphSubject} />
       <StaffFormModal
         open={formOpen}
         initialData={formInitialData}

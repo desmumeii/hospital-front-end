@@ -1,29 +1,29 @@
-import axios from "axios";
+import api from "./api";
 
 const baseUrl = "http://localhost:3001/api/healthrecords";
 
 export const getAll = async () => {
-  const response = await axios.get(baseUrl);
+  const response = await api.get(baseUrl);
   return response.data;
 };
 
 export const getById = async (id) => {
-  const response = await axios.get(`${baseUrl}/${id}`);
+  const response = await api.get(`${baseUrl}/${id}`);
   return response.data;
 };
 
 const createStaff = async (staffData) => {
-  const response = await axios.post(baseUrl, staffData);
+  const response = await api.post(baseUrl, staffData);
   return response.data;
 };
 
 const deleteStaff = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
+  const response = await api.delete(`${baseUrl}/${id}`);
   return response.data;
 };
 
 const updateStaff = async (id, updatedData) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedData);
+  const response = await api.put(`${baseUrl}/${id}`, updatedData);
   return response.data;
 };
 
