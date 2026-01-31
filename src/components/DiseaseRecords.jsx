@@ -94,7 +94,7 @@ const DiseaseRecords = () => {
             <TableCell>ĐTĐ/Tiền ĐTĐ</TableCell>
             <TableCell>Tăng huyết áp</TableCell>
             <TableCell>Ung thư tuyến giáp</TableCell>
-            <TableCell>Ung thư tuyến giáp sau phẫu thuật</TableCell>
+            <TableCell>Ung thư tuyến giáp đã phẫu thuật</TableCell>
             <TableCell>Rối loạn lipid máu</TableCell>
             <TableCell>Tăng acid uric máu</TableCell>
             <TableCell>Polyp túi mật</TableCell>
@@ -131,7 +131,7 @@ const DiseaseRecords = () => {
           <TextField label="ĐTĐ/Tiền ĐTĐ" fullWidth margin="normal" value={formData.diabetes} onChange={(e) => handleChange('diabetes', e.target.value)} />
           <TextField label="Tăng huyết áp" fullWidth margin="normal" value={formData.hypertension} onChange={(e) => handleChange('hypertension', e.target.value)} />
           <TextField label="Ung thư tuyến giáp" fullWidth margin="normal" value={formData.thyroidcancer} onChange={(e) => handleChange('thyroidcancer', e.target.value)} />
-          <TextField label="Ung thư tuyến giáp sau phẫu thuật" fullWidth margin="normal" value={formData.thyroidcanceraftersurgery} onChange={(e) => handleChange('thyroidcanceraftersurgery', e.target.value)} />
+          <TextField label="Ung thư tuyến giáp đã phẫu thuật" fullWidth margin="normal" value={formData.thyroidcanceraftersurgery} onChange={(e) => handleChange('thyroidcanceraftersurgery', e.target.value)} />
           <TextField label="Rối loạn lipid máu" fullWidth margin="normal" value={formData.dyslipidemia} onChange={(e) => handleChange('dyslipidemia', e.target.value)} />
           <TextField label="Tăng acid uric máu" fullWidth margin="normal" value={formData.hyperuricemia} onChange={(e) => handleChange('hyperuricemia', e.target.value)} />
           <TextField label="Polyp túi mật" fullWidth margin="normal" value={formData.galibladderpolyps} onChange={(e) => handleChange('galibladderpolyps', e.target.value)} />
@@ -150,7 +150,7 @@ const DiseaseRecords = () => {
           <TextField label="ĐTĐ/Tiền ĐTĐ" fullWidth margin="normal" value={formData.diabetes} onChange={(e) => handleChange('diabetes', e.target.value)} />
           <TextField label="Tăng huyết áp" fullWidth margin="normal" value={formData.hypertension} onChange={(e) => handleChange('hypertension', e.target.value)} />
           <TextField label="Ung thư tuyến giáp" fullWidth margin="normal" value={formData.thyroidcancer} onChange={(e) => handleChange('thyroidcancer', e.target.value)} />
-          <TextField label="Ung thư tuyến giáp sau phẫu thuật" fullWidth margin="normal" value={formData.thyroidcanceraftersurgery} onChange={(e) => handleChange('thyroidcanceraftersurgery', e.target.value)} />
+          <TextField label="Ung thư tuyến giáp đã phẫu thuật" fullWidth margin="normal" value={formData.thyroidcanceraftersurgery} onChange={(e) => handleChange('thyroidcanceraftersurgery', e.target.value)} />
           <TextField label="Rối loạn lipid máu" fullWidth margin="normal" value={formData.dyslipidemia} onChange={(e) => handleChange('dyslipidemia', e.target.value)} />
           <TextField label="Tăng acid uric máu" fullWidth margin="normal" value={formData.hyperuricemia} onChange={(e) => handleChange('hyperuricemia', e.target.value)} />
           <TextField label="Polyp túi mật" fullWidth margin="normal" value={formData.galibladderpolyps} onChange={(e) => handleChange('galibladderpolyps', e.target.value)} />

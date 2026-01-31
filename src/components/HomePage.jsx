@@ -78,14 +78,14 @@ const HomePage = () => {
             }))
           },
           {
-            name: 'Ung thư tuyến giáp',
+            name: 'UT tuyến giáp',
             ...Object.fromEntries(diseaseYearsUnique.map(year => {
               const record = diseaseDataRaw.find(r => r.year === year)
               return [year.toString(), record ? record.thyroidcancer : 0]
             }))
           },
           {
-            name: 'Ung thư tuyến giáp sau PT',
+            name: 'UT tuyến giáp đã PT',
             ...Object.fromEntries(diseaseYearsUnique.map(year => {
               const record = diseaseDataRaw.find(r => r.year === year)
               return [year.toString(), record ? record.thyroidcanceraftersurgery : 0]
@@ -136,8 +136,8 @@ const HomePage = () => {
           const diseaseChartData = diseaseRecord ? [
             { name: 'ĐTĐ/Tiền ĐTĐ', value: diseaseRecord.diabetes },
             { name: 'Tăng huyết áp', value: diseaseRecord.hypertension },
-            { name: 'K tuyến giáp', value: diseaseRecord.thyroidcancer },
-            { name: 'K tuyến giáp sau PT', value: diseaseRecord.thyroidcanceraftersurgery },
+            { name: 'UT tuyến giáp', value: diseaseRecord.thyroidcancer },
+            { name: 'UT tuyến giáp đã PT', value: diseaseRecord.thyroidcanceraftersurgery },
             { name: 'Rối loạn lipid máu', value: diseaseRecord.dyslipidemia },
             { name: 'Tăng acid uric', value: diseaseRecord.hyperuricemia },
             { name: 'Polyp túi mật', value: diseaseRecord.galibladderpolyps }
@@ -166,6 +166,37 @@ const HomePage = () => {
 
   return (
     <div style={{ padding: "24px", background: "#f0f9ff" }}>
+      {/* Total Patients Chart */}
+      <div style={{
+        backgroundColor: "white",
+        borderRadius: "12px",
+        padding: "24px",
+        marginBottom: "24px",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.07)"
+      }}>
+        <h2 style={{ color: "#0284c7", marginTop: 0, fontSize: "20px", borderBottom: "2px solid #0284c7", paddingBottom: "12px" }}>
+          Tổng số người khám theo năm
+        </h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart
+            data={[...yearlyData].reverse().map(yearData => ({
+              year: `Năm ${yearData.year}`,
+              total: yearData.classifyData && yearData.classifyData.length > 0 ? 
+                yearData.classifyData.reduce((sum, item) => sum + item.value, 0) : 
+                (yearData.diseaseData && yearData.diseaseData.length > 0 ? 
+                  yearData.diseaseData.reduce((sum, item) => sum + item.value, 0) : 0)
+            }))}
+            margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+            <XAxis dataKey="year" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="total" fill="#059669" radius={[8, 8, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
       {/* Overview Charts */}
       <div style={{
         backgroundColor: "white",
@@ -186,7 +217,6 @@ const HomePage = () => {
             <XAxis dataKey="name" />
             <YAxis label={{ value: 'Số lượng', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
-            <Legend />
             {years.map((year, index) => (
               <Bar 
                 key={year} 
@@ -218,7 +248,6 @@ const HomePage = () => {
             <XAxis dataKey="name" />
             <YAxis label={{ value: 'Số lượng', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
-            <Legend />
             {diseaseYears.map((year, index) => (
               <Bar 
                 key={year} 
@@ -300,7 +329,7 @@ const HomePage = () => {
                     margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} interval={0} dy={40} dx={-30} />
                     <YAxis label={{ value: 'Số lượng', angle: -90, position: 'insideLeft' }} />
                     <Tooltip />
                     <Bar dataKey="value" fill="#059669" radius={[8, 8, 0, 0]} />

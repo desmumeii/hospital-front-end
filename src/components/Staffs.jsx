@@ -65,7 +65,23 @@ const Staffs = () => {
   }
 
   const handleGraphOpen = (staff) => {
-    const list = (staffs || []).filter((item) => item.fullName === staff.fullName)
+    // Extract personal number from employee code (last 7 digits of 99XXXXX or just the personal number if shorter)
+    const getPersonalNumber = (code) => {
+      if (!code) return null
+      const codeStr = code.toString()
+      // If code is 9 digits (99XXXXX format), extract last 7 digits and convert to number
+      if (codeStr.length === 9) {
+        return parseInt(codeStr.slice(2), 10) // Remove "99" prefix and convert to number (handles leading zeros)
+      }
+      // If code is shorter, convert to number to normalize
+      return parseInt(codeStr, 10)
+    }
+    
+    const personalNumber = getPersonalNumber(staff.employeeCode)
+    const list = (staffs || []).filter((item) => {
+      const itemPersonalNumber = getPersonalNumber(item.employeeCode)
+      return itemPersonalNumber === personalNumber && item.fullName === staff.fullName
+    })
     setGraphSubject(staff)
     setGraphData(list)
     setGraphOpen(true)
