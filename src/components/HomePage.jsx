@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { getAll } from '../services/classifypatients'
 import { getAll as getAllDiseases } from '../services/diseaserecords'
+import { getAll as getAllTotalPatients } from '../services/totalpatients'
 
 const HomePage = () => {
   const [yearlyData, setYearlyData] = useState([])
@@ -9,12 +10,14 @@ const HomePage = () => {
   const [years, setYears] = useState([])
   const [diseaseChartData, setDiseaseChartData] = useState([])
   const [diseaseYears, setDiseaseYears] = useState([])
+  const [totalPatientsData, setTotalPatientsData] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const classifyDataRaw = await getAll()
         const diseaseDataRaw = await getAllDiseases()
+        const totalPatientsRaw = await getAllTotalPatients()
         
         // For overview charts
         const classifyYearsUnique = [...new Set(classifyDataRaw.map(record => record.year))].sort()
@@ -115,6 +118,15 @@ const HomePage = () => {
         ]
         setDiseaseChartData(transformedDiseaseData)
         
+        // Set total patients data
+        const sortedTotalPatients = totalPatientsRaw
+          .sort((a, b) => a.year - b.year)
+          .map(record => ({
+            year: `Năm ${record.year}`,
+            total: record.totalPatients
+          }))
+        setTotalPatientsData(sortedTotalPatients)
+        
         // Get all unique years from both datasets
         const classifyYears = new Set(classifyDataRaw.map(r => r.year))
         const diseaseYears = new Set(diseaseDataRaw.map(r => r.year))
@@ -179,13 +191,7 @@ const HomePage = () => {
         </h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart
-            data={[...yearlyData].reverse().map(yearData => ({
-              year: `Năm ${yearData.year}`,
-              total: yearData.classifyData && yearData.classifyData.length > 0 ? 
-                yearData.classifyData.reduce((sum, item) => sum + item.value, 0) : 
-                (yearData.diseaseData && yearData.diseaseData.length > 0 ? 
-                  yearData.diseaseData.reduce((sum, item) => sum + item.value, 0) : 0)
-            }))}
+            data={totalPatientsData}
             margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
@@ -217,6 +223,7 @@ const HomePage = () => {
             <XAxis dataKey="name" />
             <YAxis label={{ value: 'Số lượng', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
+            <Legend />
             {years.map((year, index) => (
               <Bar 
                 key={year} 
@@ -248,6 +255,7 @@ const HomePage = () => {
             <XAxis dataKey="name" />
             <YAxis label={{ value: 'Số lượng', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
+            <Legend />
             {diseaseYears.map((year, index) => (
               <Bar 
                 key={year} 
