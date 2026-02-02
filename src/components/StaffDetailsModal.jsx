@@ -57,7 +57,7 @@ const StaffDetailsModal = ({ staff, onOpen, onClose }) => {
               <TableCell>{staff.xray || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Siêu âm vùng chậu 2D</strong></TableCell>
+              <TableCell><strong>Siêu âm ổ bụng 2D</strong></TableCell>
               <TableCell>{staff.pelvicUltrasound2D || 'N/A'}</TableCell>
               <TableCell><strong>Siêu âm tuyến giáp 2D</strong></TableCell>
               <TableCell>{staff.thyroidUltrasound2D || 'N/A'}</TableCell>
