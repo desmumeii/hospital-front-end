@@ -14,7 +14,7 @@ Front-end web application for a hospital/clinic system. It provides a user inter
 
 - **React** (UI library)
 - **Vite** (development server + build tool)
-- **JavaScript/TypeScript** (depending on what is used in the codebase)
+- **JavaScript** (Codebase)
 - **ESLint** (linting / code quality)
 
 ## How to run it locally
