@@ -1,16 +1,61 @@
-# React + Vite
+# Hospital Front End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Front-end web application for a hospital/clinic system. It provides a user interface for interacting with hospital features such as viewing and managing relevant hospital information through a modern single-page app (SPA).
 
-Currently, two official plugins are available:
+## What this project does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Provides a responsive UI built with React.
+- Connects to a backend API (when configured) to display and manage hospital-related data.
+- Implements common SPA features such as routing, reusable components, and form-driven pages.
 
-## React Compiler
+> Note: If your backend/API URL or feature list differs, update the bullets above to match your actual implemented features.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies used
 
-## Expanding the ESLint configuration
+- **React** (UI library)
+- **Vite** (development server + build tool)
+- **JavaScript** (Codebase)
+- **ESLint** (linting / code quality)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## How to run it locally
+
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Start the development server
+
+```bash
+npm run dev
+```
+
+Then open the URL shown in your terminal (typically `http://localhost:5173`).
+
+### 3) Build for production
+
+```bash
+npm run build
+```
+
+### 4) Preview the production build
+
+```bash
+npm run preview
+```
+
+## My contributions
+
+In this repository, I personally contributed to:
+
+- Building and organizing the React/Vite front-end structure
+- Creating UI components and pages for the hospital system
+- Integrating front-end views with API endpoints (where applicable)
+- Improving styling, usability, and overall user experience
+
+---
+
+## Project setup notes
+
+This project was bootstrapped with a **React + Vite** template.
