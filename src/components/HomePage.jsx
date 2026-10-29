@@ -187,7 +187,7 @@ const HomePage = () => {
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.07)"
       }}>
         <h2 style={{ color: "#0284c7", marginTop: 0, fontSize: "20px", borderBottom: "2px solid #0284c7", paddingBottom: "12px" }}>
-          Tổng số người khám sức khỏe định kỳtheo năm
+          Tổng số người khám sức khỏe định kỳ theo năm
         </h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart
