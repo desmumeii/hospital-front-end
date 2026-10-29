@@ -69,7 +69,7 @@ const StaffDetailsModal = ({ staff, onOpen, onClose }) => {
               <TableCell>{staff.boneDensity || 'N/A'}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><strong>Chọc hút kim nhỏ</strong></TableCell>
+              <TableCell><strong>Phiến đồ âm đạo</strong></TableCell>
               <TableCell>{staff.fineNeedleAspiration || 'N/A'}</TableCell>
               <TableCell><strong>Phân loại</strong></TableCell>
               <TableCell>{staff.classification || 'N/A'}</TableCell>
